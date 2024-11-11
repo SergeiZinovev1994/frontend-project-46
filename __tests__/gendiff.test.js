@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import { gendiff, parseFile } from "../src/gendiff.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
