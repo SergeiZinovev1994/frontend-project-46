@@ -3,6 +3,7 @@
 import { gendiff, parseFile } from "../src/gendiff.js";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { test, expect } from '@jest/globals';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
