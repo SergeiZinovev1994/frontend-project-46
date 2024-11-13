@@ -11,4 +11,4 @@ install:
 	npm install
 
 testCoverage:
-	nxp jest --coverage
+	npx jest --coverage
