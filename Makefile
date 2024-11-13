@@ -8,4 +8,7 @@ test:
 	NODE_OPTIONS=--experimental-vm-modules npx jest
 
 install:
-	npm ci
+	npm install
+
+testCoverage:
+	nxp jest --coverage
