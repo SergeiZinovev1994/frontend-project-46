@@ -1,14 +1,27 @@
 name: testAndLint
-
-on: 
-  push
+on: push
 
 jobs:
   build-frontend:
     runs-on: ubuntu-latest
     steps:
+      # Клон репозиторий
       - uses: actions/checkout@v4
+      # Ставим NOde.js
       - uses: actions/setup-node@v4
+      # Ставим зависимости
       - run: make install
-      - run: make test
-      - run: make lint
+      # Запуск тестов
+      - name: run test
+        run: make test
+      # Запуск Eslint
+      - name: run lint
+        run: make lint
+      # Тест покрытия и публикация
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v9.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: make testCoverage
+          debug: true
