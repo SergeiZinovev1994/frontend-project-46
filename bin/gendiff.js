@@ -7,11 +7,10 @@ program
   .name('gendiff')
   .description('Compares two configuration files and shows a difference.')
   .version('0.0.1')
-  .argument('<filePath1>', 'путь к 1му файлу')
-  .argument('<filePath2>', 'путь к 2му файлу')
+  .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
-  .action((filePath1, filePath2) => {
-    console.log(gendiff(filePath1, filePath2));
+  .action((filepath1, filepath2) => {
+    console.log(gendiff(filepath1, filepath2));
   });
 
-program.parse();
+program.parse(process.argv);
