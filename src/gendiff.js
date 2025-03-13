@@ -1,11 +1,10 @@
 import _ from 'lodash';
-import parseFile from './parsers.js';
-import getPathToFile from './helpers.js';
+import { readContent } from './helpers.js';
 
 export const gendiff = (path1, path2) => {
   
-  const file1 = parseFile(getPathToFile(path1));
-  const file2 = parseFile(getPathToFile(path2));
+  const file1 = readContent(path1);
+  const file2 = readContent(path2);
 
   const core = (content1, content2) => {
     const keys = _.uniq(Object.keys({ ...content1, ...content2 }));
