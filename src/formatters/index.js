@@ -10,6 +10,6 @@ export default (data, formatName) => {
     case 'json':
       return JSON.stringify(data);
     default:
-      throw new Error(`Unknown ${formatName}`);
+      throw new Error(`Unknown formatName - ${formatName}`);
   };
 };
