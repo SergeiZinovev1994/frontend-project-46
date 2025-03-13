@@ -7,9 +7,9 @@ const stringify = (value) => {
     case 'object':
       return value === null ? null : '[complex value]';
     default:
-      throw new Error('Unknown type of data ');
+      throw new Error(`Unknown type of data - ${typeof(value)}`);
   }
-}
+};
 
 export const plain = (data, path = '') => data
   .flatMap(({ key, body, type }) => {
