@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { gendiff } from '../src/gendiff.js';
-import start from '../src/formatters/index.js';
+import start from '../index.js';
 
 program
   .name('gendiff')
@@ -11,9 +10,8 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
-    const data = gendiff(filepath1, filepath2);
     const formatName = program.opts().format;
-    console.log(start(data, formatName));
+    console.log(start(filepath1, filepath2, formatName));
   });
 
 program.parse(process.argv);
