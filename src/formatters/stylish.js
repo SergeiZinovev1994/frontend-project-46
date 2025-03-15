@@ -46,6 +46,8 @@ export const stylish = (content) => {
         case 'differentObjects': {
           return `${' '.repeat(indentDepth(depth))}${sign}${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
         }
+        default: 
+          throw new Error(`Unknown type of Data - ${type}`);
       }
     });
   };
