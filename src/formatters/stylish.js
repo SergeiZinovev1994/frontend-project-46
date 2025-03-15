@@ -27,13 +27,10 @@ const getData = (content, ind) => {
 
 export const stylish = (content) => {
   const iter = (data, depth = 1) => {
-
     const formatBody = (data) => (_.isObject(data) ?
     `{\n${getData(data, depth + 1)}\n${' '.repeat(indentDepth(depth, false))}}`:
     getData(data, depth + 1));
-
     const formatString = (indent, sign, key, body) => `${' '.repeat(indent)}${sign}${key}: ${body}`;
-
     return data.flatMap(({ key, body, type, sign }) => {
       switch(type) {
         case 'added':

@@ -2,10 +2,8 @@ import _ from 'lodash';
 import { readContent } from './helpers.js';
 
 export const gendiff = (path1, path2) => {
-  
   const file1 = readContent(path1);
   const file2 = readContent(path2);
-
   const core = (content1, content2) => {
     const keys = _.uniq(Object.keys({ ...content1, ...content2 }));
     const result = keys.toSorted().map((key) => {
@@ -23,6 +21,5 @@ export const gendiff = (path1, path2) => {
     });
     return result;
   };
-  
   return core(file1, file2);
 };
