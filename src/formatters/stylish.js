@@ -27,11 +27,9 @@ const getData = (content, ind) => {
 
 export const stylish = (content) => {
   const iter = (data, depth = 1) => {
-    const countTabs = indentDepth(depth);
-    const countIndent = indentDepth(depth, false);
 
     const formatBody = (data) => (_.isObject(data) ?
-    `{\n${getData(data, depth + 1)}\n${' '.repeat(countIndent)}}`:
+    `{\n${getData(data, depth + 1)}\n${' '.repeat(indentDepth(depth, false))}}`:
     getData(data, depth + 1));
 
     const formatString = (indent, sign, key, body) => `${' '.repeat(indent)}${sign}${key}: ${body}`;
@@ -41,15 +39,15 @@ export const stylish = (content) => {
         case 'added':
         case 'removed':
         case 'equal': {
-          return `${formatString(countTabs, sign, key, formatBody(body))}`;
+          return `${formatString(indentDepth(depth), sign, key, formatBody(body))}`;
         }
         case 'updated': {
           const { signCont1, signCont2 } = sign;
           const { content1, content2 } = body;
-          return `${formatString(countTabs, signCont1, key, formatBody(content1))}\n${formatString(countTabs, signCont2, key, formatBody(content2))}`;
+          return `${formatString(indentDepth(depth), signCont1, key, formatBody(content1))}\n${formatString(indentDepth(depth), signCont2, key, formatBody(content2))}`;
         }
         case 'differentObjects': {
-          return `${' '.repeat(countTabs)}${sign}${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(countIndent)}}`;
+          return `${' '.repeat(indentDepth(depth))}${sign}${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
         }
       }
     });
