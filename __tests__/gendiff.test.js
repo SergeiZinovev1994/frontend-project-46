@@ -1,40 +1,23 @@
 /* eslint-env jest */
-
-import { gendiff } from '../src/gendiff.js';
-import parseFile from '../src/parsers.js'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import start from '../index.js'
 import { test, expect, describe } from '@jest/globals';
+import { getFixturePath } from '../src/helpers.js';
+import fs from 'fs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const commonPath = (fileName) => `${__dirname}/../__fixtures__/${fileName}`;
-
-describe ('gendiffTests', () => {
-  test('jsonWithJson', () => {
-  expect(gendiff(commonPath('simpleObject1.json'), commonPath('simpleObject2.json')))
-  .toEqual(parseFile(commonPath('simpleResult.json')));
+describe('gendiff', () => {
+  test.each([
+    ['file1.json', 'file2.json', 'stylish', 'stylishTest.txt'],
+    ['file1.yml', 'file2.yaml', 'stylish', 'stylishTest.txt'],
+    ['file1.json', 'file2.yaml', 'stylish', 'stylishTest.txt'],
+    ['file1.json', 'file2.yaml', 'plain', 'plainTest.txt'],
+    ['file1.yml', 'file2.json', 'json', 'jsonTest.json']
+  ])('gendiff', (fileName1, fileName2, formatName, fileName3) => {
+    expect(start(getFixturePath(fileName1), getFixturePath(fileName2), formatName)).toBe(fs.readFileSync(getFixturePath(fileName3), 'utf8'))
+  }, 0)
 });
-  test('ymlWithYaml', () => {
-    expect(gendiff(commonPath('file1.yml'), commonPath('file2.yaml')))
-    .toEqual(parseFile(commonPath('resultWithYml.json')));
+
+describe('default', () => {
+  test('default', () => {
+    expect(start(getFixturePath('file1.json'), getFixturePath('file2.json'))).toBe(fs.readFileSync(getFixturePath('stylishTest.txt'), 'utf8'));
   });
 });
-
-test('parseFileTest', () => {
-  expect(parseFile(commonPath('file1.json')))
-  .toEqual({
-  "host": "hexlet.io",
-  "timeout": 50,
-  "proxy": "123.234.53.22",
-  "follow": false
-});
-  expect(parseFile(commonPath('file1.yml')))
-  .toEqual({
-  "host": "hexlet.io",
-  "timeout": 50,
-  "proxy": "123.234.53.22",
-  "follow": false
-});
-})
