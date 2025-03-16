@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
 const indentDepth = (depth, flag = true) => {
-    const spacesPerDepth = 4;
-    const baseIndex = 2;
-    return flag ? depth * spacesPerDepth - baseIndex : depth * spacesPerDepth;
-  };
+  const spacesPerDepth = 4;
+  const baseIndex = 2;
+  return flag ? depth * spacesPerDepth - baseIndex : depth * spacesPerDepth;
+};
 
 const getData = (content, ind) => {
   const iter = (data, depth) => {
@@ -14,25 +14,27 @@ const getData = (content, ind) => {
     const countTabs = indentDepth(depth, false);
     const keys = Object.keys(data);
     const result = keys.map((key) => {
-      const formattedBody = _.isObject(data[key]) ?
-      `{\n${iter(data[key], depth + 1)}\n${' '.repeat(countTabs)}}` :
-      iter(data[key], depth);
+      const formattedBody = _.isObject(data[key])
+        ? `{\n${iter(data[key], depth + 1)}\n${' '.repeat(countTabs)}}`
+        : iter(data[key], depth);
 
-    return `${' '.repeat(countTabs)}${key}: ${formattedBody}`;
-  });
+      return `${' '.repeat(countTabs)}${key}: ${formattedBody}`;
+    });
     return `${result.join('\n')}`;
-  }
+  };
   return iter(content, ind);
 };
 
-export const stylish = (content) => {
+export default (content) => {
   const iter = (data, depth = 1) => {
-    const formatBody = (data) => (_.isObject(data) ?
-    `{\n${getData(data, depth + 1)}\n${' '.repeat(indentDepth(depth, false))}}`:
-    getData(data, depth + 1));
+    const formatBody = (value) => (_.isObject(value)
+      ? `{\n${getData(value, depth + 1)}\n${' '.repeat(indentDepth(depth, false))}}`
+      : getData(value, depth + 1));
     const formatString = (indent, sign, key, body) => `${' '.repeat(indent)}${sign}${key}: ${body}`;
-    return data.flatMap(({ key, body, type, sign }) => {
-      switch(type) {
+    return data.flatMap(({
+      key, body, type, sign,
+    }) => {
+      switch (type) {
         case 'added':
         case 'removed':
         case 'equal': {
@@ -46,7 +48,7 @@ export const stylish = (content) => {
         case 'differentObjects': {
           return `${' '.repeat(indentDepth(depth))}${sign}${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
         }
-        default: 
+        default:
           throw new Error(`Unknown type of Data - ${type}`);
       }
     });

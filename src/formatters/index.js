@@ -1,5 +1,5 @@
-import { stylish } from "./stylish.js";
-import { plain } from "./plain.js";
+import stylish from './stylish.js';
+import plain from './plain.js';
 
 export default (data, formatName) => {
   switch (formatName) {
@@ -11,5 +11,5 @@ export default (data, formatName) => {
       return JSON.stringify(data);
     default:
       throw new Error(`Unknown formatName - ${formatName}`);
-  };
+  }
 };

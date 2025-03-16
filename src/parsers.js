@@ -10,7 +10,7 @@ export default (pathFile) => {
     case '.yml':
     case '.yaml':
       return yaml.load(readFileSync(pathFile, 'utf8'));
-    default: 
-    throw new Error(`${extension} - unknown extension`);
+    default:
+      throw new Error(`${extension} - unknown extension`);
   }
 };

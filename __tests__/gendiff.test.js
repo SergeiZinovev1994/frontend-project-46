@@ -1,8 +1,8 @@
 /* eslint-env jest */
-import start from '../index.js'
 import { test, expect, describe } from '@jest/globals';
-import { getFixturePath } from '../src/helpers.js';
 import fs from 'fs';
+import start from '../index.js';
+import { getFixturePath } from '../src/helpers.js';
 
 describe('gendiff', () => {
   test.each([
@@ -10,10 +10,10 @@ describe('gendiff', () => {
     ['file1.yml', 'file2.yaml', 'stylish', 'stylishTest.txt'],
     ['file1.json', 'file2.yaml', 'stylish', 'stylishTest.txt'],
     ['file1.json', 'file2.yaml', 'plain', 'plainTest.txt'],
-    ['file1.yml', 'file2.json', 'json', 'jsonTest.json']
+    ['file1.yml', 'file2.json', 'json', 'jsonTest.json'],
   ])('gendiff', (fileName1, fileName2, formatName, fileName3) => {
-    expect(start(getFixturePath(fileName1), getFixturePath(fileName2), formatName)).toBe(fs.readFileSync(getFixturePath(fileName3), 'utf8'))
-  }, 0)
+    expect(start(getFixturePath(fileName1), getFixturePath(fileName2), formatName)).toBe(fs.readFileSync(getFixturePath(fileName3), 'utf8'));
+  }, 0);
 });
 
 describe('default', () => {
