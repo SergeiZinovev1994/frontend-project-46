@@ -43,5 +43,4 @@ export default [
       'no-underscore-dangle': [2, { allow: ['__filename', '__dirname'] }],
     },
   },
-
 ];
