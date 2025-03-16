@@ -6,6 +6,8 @@ const stringify = (value) => {
       return value;
     case 'object':
       return value === null ? null : '[complex value]';
+    case 'number':
+      return String(value);
     default:
       throw new Error(`Unknown type of data - ${typeof(value)}`);
   }
@@ -22,8 +24,8 @@ export const plain = (data, path = '') => data
         const { content1, content2 } = body;
         return `Property '${path}${key}' was updated. From ${stringify(content1)} to ${stringify(content2)}`;
       }
-    case 'equal':
-      return [];
+      case 'equal':
+        return [];
       case 'differentObjects': {
         return plain(body, `${path}${key}.`);
       }
