@@ -10,6 +10,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
+    console.log(filepath1, filepath2);
     const formatName = program.opts().format;
     console.log(start(filepath1, filepath2, formatName));
   });
