@@ -14,13 +14,15 @@ const compat = new FlatCompat({ baseDirectory: __dirname, recommendedConfig: plu
 export default [
   { languageOptions: { globals: globals.node } },
   ...compat.extends('airbnb-base'),
-  { plugins: {
+  {
+    plugins: {
     fp,
-  },
+    },
     rules: {
       'max-len': ['error', { code: 100 }],
       'object-curly-spacing': ['error', 'always'],
       'no-console': 0,
+      'indent': 'error',
       'import/extensions': 0,
       'fp/no-arguments': 'error',
       'fp/no-class': 'error',
