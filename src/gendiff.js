@@ -23,7 +23,7 @@ export default (path1, path2) => {
         return {
           key, body: { content1: content1[key], content2: content2[key] }, type: 'updated', sign: { signCont1: '- ', signCont2: '+ ' },
         };
-      } else {
+      } else if (_.isPlainObject(content1[key]) && _.isPlainObject(content2[key])) {
         return {
           key, body: core(content1[key], content2[key]), type: 'differentObjects', sign: '  ',
         };
