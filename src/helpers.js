@@ -1,5 +1,5 @@
 import process from 'node:process';
-import { resolve, dirname, join } from 'path'
+import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import parseFile from './parsers.js';
 
