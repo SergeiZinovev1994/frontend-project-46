@@ -1,9 +1,6 @@
 import _ from 'lodash';
-import { readContent } from './helpers.js';
 
-export default (path1, path2) => {
-  const file1 = readContent(path1);
-  const file2 = readContent(path2);
+export default (file1, file2) => {
   const core = (content1, content2) => {
     const keys = _.uniq(Object.keys({ ...content1, ...content2 }));
     return keys.toSorted().map((key) => {
