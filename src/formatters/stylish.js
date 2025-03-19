@@ -40,7 +40,7 @@ export default (content) => {
           return `${' '.repeat(indentDepth(depth))}  ${key}: ${formatBody(body)}`;
         case 'updated': {
           const { content1, content2 } = body;
-          return `${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(content1)}\n${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(content2)}`;
+          return `${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(content1)}\n${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(content2)}`;
         }
         case 'differentObjects':
           return `${' '.repeat(indentDepth(depth))}  ${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
