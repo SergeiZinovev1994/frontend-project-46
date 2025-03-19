@@ -33,14 +33,14 @@ export default (content) => {
     return data.flatMap(({ key, body, type }) => {
       switch (type) {
         case 'added':
-          return `${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(body)}`;
-        case 'removed':
           return `${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(body)}`;
+        case 'removed':
+          return `${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(body)}`;
         case 'equal':
           return `${' '.repeat(indentDepth(depth))}  ${key}: ${formatBody(body)}`;
         case 'updated': {
           const { content1, content2 } = body;
-          return `${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(content1)}\n${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(content2)}`;
+          return `${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(content1)}\n${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(content2)}`;
         }
         case 'differentObjects':
           return `${' '.repeat(indentDepth(depth))}  ${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
