@@ -1,9 +1,9 @@
 /* eslint-env jest */
 import { test, expect, describe } from '@jest/globals';
 import fs from 'fs';
-import genDiff from '../src/index.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
