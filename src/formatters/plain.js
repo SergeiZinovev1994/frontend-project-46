@@ -27,7 +27,7 @@ export default (content) => {
         }
         case 'equal':
           return [];
-        case 'differentObjects': {
+        case 'nested': {
           return iter(body, `${path}${key}.`);
         }
         default:

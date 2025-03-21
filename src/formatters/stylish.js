@@ -42,7 +42,7 @@ export default (content) => {
           const { content1, content2 } = body;
           return `${' '.repeat(indentDepth(depth))}- ${key}: ${formatBody(content1)}\n${' '.repeat(indentDepth(depth))}+ ${key}: ${formatBody(content2)}`;
         }
-        case 'differentObjects':
+        case 'nested':
           return `${' '.repeat(indentDepth(depth))}  ${key}: {\n${iter(body, depth + 1).join('\n')}\n${' '.repeat(indentDepth(depth, false))}}`;
         default:
           throw new Error(`Unknown type of Data - ${type}`);
