@@ -1,6 +1,6 @@
-import gendiff from './src/gendiff.js';
-import formatData from './src/formatters/index.js';
-import { readContent } from './src/helpers.js';
+import gendiff from './gendiff.js';
+import formatData from './formatters/index.js';
+import readContent from './helpers.js';
 
 export default (filePath1, filePath2, formatName = 'stylish') => {
   const file1 = readContent(filePath1);
